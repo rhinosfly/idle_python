@@ -1,3 +1,4 @@
+#!/usr/bin/python
 #working progress idle game in pyray
 
 import pyray as pr
