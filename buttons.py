@@ -1,6 +1,7 @@
 import pyray as pr
+import data
 
-class Button():
+class Button:
     def __init__(self, x, y, width, height, color, name, function):
         self.rectangle = pr.Rectangle(x, y, width, height)
         self.color = color
@@ -19,3 +20,18 @@ class Button():
     def draw(self):
         pr.draw_rectangle_rec(self.rectangle, self.color)
         pr.draw_text(self.name, int(self.rectangle.x), int(self.rectangle.y), 10, pr.WHITE)
+
+    class Functions:
+        def increment():
+            data.money += data.Click.value
+
+        def upgradeClick():
+            if data.money >= data.Click.cost:
+                data.money -= data.Click.cost
+                data.Click.level += 1
+                data.Click.update()
+                List[1].name = str(data.Click.cost) + ": click damage +1"
+
+
+List = [Button(600,100,50,50,pr.RED,"click me", Button.Functions.increment),
+           Button(20,100,50,20,pr.BLUE, "20: click damage +1", Button.Functions.upgradeClick)]
