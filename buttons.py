@@ -15,7 +15,7 @@ class Button:
         else:
             return False
     def onClick(self):
-        if self.isClicked():
+        if self.function and self.isClicked():
             return self.function()
     def draw(self):
         pr.draw_rectangle_rec(self.rectangle, self.color)
