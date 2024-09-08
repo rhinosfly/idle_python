@@ -6,7 +6,7 @@ import data
 import buttons
 import clickers
 
-pr.init_window(800,400,"idle game")
+pr.init_window(800,450,"idle game")
 pr.set_target_fps(60)
 data.Click.update()     #initialize click data
 
