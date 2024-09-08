@@ -1,5 +1,6 @@
 import pyray as pr
 import data
+import clickers
 
 class Button:
     def __init__(self, x, y, width, height, color, name, function):
@@ -35,4 +36,4 @@ class Button:
 
 List = [Button(600,100,50,50,pr.RED,"click me", Button.Functions.increment),
         Button(20,100,50,20,pr.BLUE, "20: click damage +1", Button.Functions.upgradeClick),
-        Button(20,140,50,20,pr.BLUE, "100: clickers +1", None)]
+        Button(20,140,50,20,pr.BLUE, "100: clickers +1", clickers.Clicker.add)]
