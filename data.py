@@ -1,7 +1,7 @@
 #contains all data 
 
 money = 0
-
+clickers = 0
 
 class Click:
     level = 1

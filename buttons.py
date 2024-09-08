@@ -34,4 +34,5 @@ class Button:
 
 
 List = [Button(600,100,50,50,pr.RED,"click me", Button.Functions.increment),
-           Button(20,100,50,20,pr.BLUE, "20: click damage +1", Button.Functions.upgradeClick)]
+        Button(20,100,50,20,pr.BLUE, "20: click damage +1", Button.Functions.upgradeClick),
+        Button(20,140,50,20,pr.BLUE, "100: clickers +1", None)]
