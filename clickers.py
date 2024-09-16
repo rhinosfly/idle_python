@@ -1,7 +1,6 @@
 #Clicker class definition
 
 import pyray as pr
-import data
 
 class Clicker:
     color = pr.WHITE

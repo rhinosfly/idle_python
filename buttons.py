@@ -1,5 +1,5 @@
 import pyray as pr
-import data
+from general_datas import General_Data
 from clicks import Click
 import clickers
 
@@ -23,13 +23,13 @@ class Button:
         pr.draw_rectangle_rec(self.rectangle, self.color)
         pr.draw_text(self.name, int(self.rectangle.x), int(self.rectangle.y), 10, pr.WHITE)
 
-    class Functions:
+    class Functions:    # all of the functions with can be addded to a button. might not keep here
         def increment():
-            data.money += Click.value
+            General_Data.money += Click.value
 
         def upgradeClick():
-            if data.money >= Click.cost:
-                data.money -= Click.cost
+            if General_Data.money >= Click.cost:
+                General_Data.money -= Click.cost
                 Click.level += 1
                 Click.update()
                 List[1].name = str(Click.cost) + ": click damage +1"

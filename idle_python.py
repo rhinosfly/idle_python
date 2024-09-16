@@ -2,7 +2,7 @@
 #working progress idle game in pyray
 
 import pyray as pr
-import data
+from general_datas import General_Data
 from clicks import Click
 import buttons
 import clickers
@@ -22,8 +22,8 @@ while not pr.window_should_close():
         button.draw()
     for clicker in clickers.List:   #tmp
         clicker.draw()
-    pr.draw_text(f"{data.money}", 10, 10, 20, pr.WHITE)
-    pr.draw_text("click damage: " + str(Click.value), 10, 30, 20, pr.WHITE)
+    pr.draw_text(f"{General_Data.money}", 10, 10, 20, pr.WHITE)
+    pr.draw_text(f"click damage: {Click.value}", 10, 30, 20, pr.WHITE)
     pr.end_drawing()
 
 pr.close_window()
