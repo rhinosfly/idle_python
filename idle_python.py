@@ -3,12 +3,13 @@
 
 import pyray as pr
 import data
+from clicks import Click
 import buttons
 import clickers
 
 pr.init_window(800,450,"idle game")
 pr.set_target_fps(60)
-data.Click.update()     #initialize click data
+Click.update()     #initialize click data
 
 
 while not pr.window_should_close():
@@ -22,7 +23,7 @@ while not pr.window_should_close():
     for clicker in clickers.List:   #tmp
         clicker.draw()
     pr.draw_text(f"{data.money}", 10, 10, 20, pr.WHITE)
-    pr.draw_text("click damage: " + str(data.Click.value), 10, 30, 20, pr.WHITE)
+    pr.draw_text("click damage: " + str(Click.value), 10, 30, 20, pr.WHITE)
     pr.end_drawing()
 
 pr.close_window()

@@ -1,5 +1,6 @@
 import pyray as pr
 import data
+from clicks import Click
 import clickers
 
 class Button:
@@ -24,14 +25,14 @@ class Button:
 
     class Functions:
         def increment():
-            data.money += data.Click.value
+            data.money += Click.value
 
         def upgradeClick():
-            if data.money >= data.Click.cost:
-                data.money -= data.Click.cost
-                data.Click.level += 1
-                data.Click.update()
-                List[1].name = str(data.Click.cost) + ": click damage +1"
+            if data.money >= Click.cost:
+                data.money -= Click.cost
+                Click.level += 1
+                Click.update()
+                List[1].name = str(Click.cost) + ": click damage +1"
 
 
 List = [Button(600,100,50,50,pr.RED,"click me", Button.Functions.increment),
