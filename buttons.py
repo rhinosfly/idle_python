@@ -1,9 +1,9 @@
 import pyray as pr
 from general_datas import General_Data
-from clicks import Click
-import clickers
 
 class Button:
+    Dict = {}
+
     def __init__(self, x, y, width, height, color, name, function):
         self.rectangle = pr.Rectangle(x, y, width, height)
         self.color = color
@@ -23,7 +23,3 @@ class Button:
         pr.draw_rectangle_rec(self.rectangle, self.color)
         pr.draw_text(self.name, int(self.rectangle.x), int(self.rectangle.y), 10, pr.WHITE)
 
-
-List = [Button(600,100,50,50,pr.RED,"click me", Click.click), 
-        Button(20,100,50,20,pr.BLUE, "20: click damage +1", Click.upgrade),
-        Button(20,140,50,20,pr.BLUE, "100: clickers +1", clickers.Clicker.add)]

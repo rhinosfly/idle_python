@@ -1,14 +1,20 @@
+import pyray as pr
 from general_datas import General_Data
+from buttons import Button
 
 class Click:
     level = 1
     value = None
     cost  = None
 
-    @classmethod
-    def update(cls):
-        cls.value = cls.level
-        cls.cost = 10 * (2 ** cls.level)
+    def init():
+        Click.update()
+        Button.Dict["click"] = Button(600,100,50,50,pr.RED,"click me", Click.click)
+        Button.Dict["upgradeClick"] = Button(20,100,50,20,pr.BLUE, "20: click damage +1", Click.upgrade)
+
+    def update():
+        Click.value = Click.level
+        Click.cost = 10 * (2 ** Click.level)
 
     def click():
         General_Data.money += Click.value
@@ -18,7 +24,4 @@ class Click:
             General_Data.money -= Click.cost
             Click.level += 1
             Click.update()
-        #    List[1].name = str(Click.cost) + ": click damage +1"
-        #   used to change button name; will figure this out later
-
-
+            Button.Dict["upgradeClick"].name = str(Click.cost) + ": click damage +1"
