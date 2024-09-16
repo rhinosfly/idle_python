@@ -23,10 +23,7 @@ class Button:
         pr.draw_rectangle_rec(self.rectangle, self.color)
         pr.draw_text(self.name, int(self.rectangle.x), int(self.rectangle.y), 10, pr.WHITE)
 
-    class Functions:    # all of the functions with can be addded to a button. might not keep here
-        def increment():
-            General_Data.money += Click.value
-
+    class Functions:    #migrating these to their respective classes and files 
         def upgradeClick():
             if General_Data.money >= Click.cost:
                 General_Data.money -= Click.cost
@@ -35,6 +32,6 @@ class Button:
                 List[1].name = str(Click.cost) + ": click damage +1"
 
 
-List = [Button(600,100,50,50,pr.RED,"click me", Button.Functions.increment),
+List = [Button(600,100,50,50,pr.RED,"click me", Click.click), 
         Button(20,100,50,20,pr.BLUE, "20: click damage +1", Button.Functions.upgradeClick),
         Button(20,140,50,20,pr.BLUE, "100: clickers +1", clickers.Clicker.add)]
