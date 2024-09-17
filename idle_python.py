@@ -28,6 +28,9 @@ while not pr.window_should_close():
         clicker.draw()
     pr.draw_text(f"{General_Data.money}", 10, 10, 20, pr.WHITE)
     pr.draw_text(f"click damage: {Click.value}", 10, 30, 20, pr.WHITE)
+    pr.draw_text(f"clickers: {len(Clicker.List)}", 10, 50, 20, pr.WHITE)
+    pr.draw_text("dps: " + str(len(Clicker.List)*Click.value*Clicker.clicks_per_minute/60), 10, 70, 20, pr.WHITE)
+
     pr.end_drawing()
 
 pr.close_window()

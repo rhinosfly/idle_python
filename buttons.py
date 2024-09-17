@@ -21,5 +21,5 @@ class Button:
             return self.function()
     def draw(self):
         pr.draw_rectangle_rec(self.rectangle, self.color)
-        pr.draw_text(self.name, int(self.rectangle.x), int(self.rectangle.y), 10, pr.WHITE)
+        pr.draw_text(self.name, int(self.rectangle.x) + 3, int(self.rectangle.y), 20, pr.WHITE)
 
