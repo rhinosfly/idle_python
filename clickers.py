@@ -28,7 +28,6 @@ class Clicker:
             Clicker.cost *= 2
             Button.Dict["BuyClicker"].name = f"{Clicker.cost}: clickers +1"
 
-
     def add():
         position = Clicker.getNextPosition()
         Clicker.List.append(Clicker(position.x, position.y))
@@ -46,6 +45,7 @@ class Clicker:
     
     def __init__(self, x, y):
         self.position = pr.Vector2(x,y)
+        self.homePosition = pr.Vector2(x,y)
         self.triangle = Clicker.setTriangle(self.position)
         self.frame_count = 0 
 
@@ -56,10 +56,13 @@ class Clicker:
         return triangle
 
     def updateSelf(self):
+        self.position.y -= Clicker.padding/Clicker.frames_per_click
         self.frame_count += 1
         if self.frame_count >= Clicker.frames_per_click:
             Click.click()
             self.frame_count = 0
+            self.position.y = self.homePosition.y
+        self.triangle = Clicker.setTriangle(self.position)
 
     def draw(self):
         pr.draw_triangle(self.triangle[0], self.triangle[1], self.triangle[2], Clicker.color)
