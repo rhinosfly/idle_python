@@ -8,7 +8,7 @@ from buttons import Button
 from clickers import Clicker
 
 pr.init_window(800,450,"idle game")
-pr.set_target_fps(60)
+pr.set_target_fps(General_Data.FRAMES_PER_SECOND)
 
 Click.init()     #initialize click data
 Clicker.init()
@@ -17,6 +17,8 @@ while not pr.window_should_close():
 
     for name in Button.Dict:
         Button.Dict[name].onClick()
+    for clicker in Clicker.List:
+        clicker.updateSelf()
         
     pr.begin_drawing()
     pr.clear_background(pr.BLACK)

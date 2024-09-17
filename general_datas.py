@@ -2,3 +2,4 @@
 
 class General_Data:
     money = 0
+    FRAMES_PER_SECOND = 60
