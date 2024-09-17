@@ -18,7 +18,7 @@ class Clicker:
     def init():
         Clicker.updateClass()
         Button.Dict["BuyClicker"] = Button(20,190,50,20,pr.BLUE, "100: clickers +1", Clicker.buy)
-        Button.Dict["UpgradeClickerSpeed"] = Button(20,230,50,20,pr.BLUE, "1000: clickerSpeed 1/(x+1)", Clicker.buyUpgradeSpeed)
+        Button.Dict["UpgradeClickerSpeed"] = Button(20,230,50,20,pr.BLUE, "1000: cps +1", Clicker.buyUpgradeSpeed)
 
     def updateClass():
         Clicker.clicks_per_minute = 60*(Clicker.level + 1)
@@ -42,7 +42,7 @@ class Clicker:
             General_Data.money -= Clicker.upgradeCost
             Clicker.upgradeCost *= 2
             Clicker.upgradeSpeed()
-            Button.Dict["UpgradeClickerSpeed"].name = f"{Clicker.upgradeCost}: clickerSpeed 1/(x+1)"
+            Button.Dict["UpgradeClickerSpeed"].name = f"{Clicker.upgradeCost}: cps +1" 
 
     def upgradeSpeed():
         Clicker.level += 1
