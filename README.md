@@ -1,38 +1,58 @@
-# idle_python v0.2
+# idle_python v0.3.1
 
-constantly in-progress idle game using pyray (raylib bindings for python) for python practice
+constantly in-progress idle game using pyray (raylib bindings for python) for Python practice
 
 ### directions
 - install python
 - install pyray
-    - probably: `pip install pyray`
-- clone repositry, or download files
+    - probably: `pip install python`
+    - or: pip3 install python
+- clone repository, or download files
 - change to new directory
-    - probably: `idle_python-main`
-- run: `python idle_python.py`
+    - probably: `idle_python-main` if downloaded
+    - `idle_python` if cloned
+- run: `idle_python.py`
+- or `python idle_python.py`
 
 ### features
-- click box -> increment money!
-- upgrade clicks
+- v0.1: click box -> increment money!
+- v0.2: upgrade clicks
+- v0.3: (new!) buy clickers
 
 ### file structure
 - idle_python.py
-	- contains
-    	- the main script
-    - imports
-        - pyray
-        - buttons
-        - data
+	- contains:
+    		- the main script
+    	- imports:
+        	- pyray
+        	- General_Data
+        	- Button
+        	- Clicker
+        	- Click
+- clickers.py
+	- contains:
+		- Clicker class definition
+    			- including list of clickers
+    	- imports:
+       		- pyray
+           	- Button
+       		- General_Data
+- clicks.py
+  	- contains:
+  		- Click class definition
+	- imports:
+		- pyray
+    		- General_Data
+    		- Button
 - buttons.py
-	- contains
+	- contains:
     	- Button (class definition)
-    	- List (of buttons)
-    - imports
+    		- including dictionary of buttons
+    - imports:
         - pyray
-        - data
-- data.py
+        - General_Data
+- general_datas.py
 	- contains
-		- all dynamic data 
-		- Click (class definition)
+		- all globally shared data
 	- imports
 		- pyray
