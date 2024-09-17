@@ -23,9 +23,11 @@ class Clicker:
 
     def buy():
         if General_Data.money >= Clicker.cost:
+            General_Data.money -= Clicker.cost
             Clicker.add()
             Clicker.cost *= 2
             Button.Dict["BuyClicker"].name = f"{Clicker.cost}: clickers +1"
+
 
     def add():
         position = Clicker.getNextPosition()
