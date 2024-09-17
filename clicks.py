@@ -9,7 +9,7 @@ class Click:
 
     def init():
         Click.update()
-        Button.Dict["click"] = Button(550,100,150,150,pr.RED,"click me", Click.click)
+        Button.Dict["clickMe"] = Button(550,100,150,150,pr.RED,"click me", Click.click)
         Button.Dict["upgradeClick"] = Button(20,100,50,20,pr.BLUE, "20: click damage +1", Click.upgrade)
 
     def update():
