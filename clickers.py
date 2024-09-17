@@ -5,20 +5,24 @@ from clicks import Click
 
 class Clicker:
     color = pr.WHITE
+    level = 0
     clicks_per_minute = 60
     frames_per_click = None
     dimentions = pr.Vector2(14,21)
     padding = 5
     cost = 100
+    upgradeCost = 1000
     listLength = 0
     List = []
 
     def init():
         Clicker.updateClass()
-        Button.Dict["BuyClicker"] = Button(20,140,50,20,pr.BLUE, "100: clickers +1", Clicker.buy)
+        Button.Dict["BuyClicker"] = Button(20,190,50,20,pr.BLUE, "100: clickers +1", Clicker.buy)
+        Button.Dict["UpgradeClickerSpeed"] = Button(20,230,50,20,pr.BLUE, "1000: clickerSpeed 1/(x+1)", Clicker.buyUpgradeSpeed)
 
     def updateClass():
-        Clicker.frames_per_click = Clicker.clicks_per_minute / 60.0 * General_Data.FRAMES_PER_SECOND
+        Clicker.clicks_per_minute = 60*(Clicker.level + 1)
+        Clicker.frames_per_click = 60.0 * General_Data.FRAMES_PER_SECOND / Clicker.clicks_per_minute
         Clicker.listLength = len(Clicker.List)
 
     def buy():
@@ -32,6 +36,18 @@ class Clicker:
         position = Clicker.getNextPosition()
         Clicker.List.append(Clicker(position.x, position.y))
         Clicker.updateClass()
+
+    def buyUpgradeSpeed():
+        if General_Data.money >= Clicker.upgradeCost:
+            General_Data.money -= Clicker.upgradeCost
+            Clicker.upgradeCost *= 2
+            Clicker.upgradeSpeed()
+            Button.Dict["UpgradeClickerSpeed"].name = f"{Clicker.upgradeCost}: clickerSpeed 1/(x+1)"
+
+    def upgradeSpeed():
+        Clicker.level += 1
+        Clicker.updateClass()
+
 
     def getNextPosition():
         width = Clicker.dimentions.x + Clicker.padding 
