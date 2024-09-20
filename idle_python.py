@@ -8,7 +8,7 @@ from clickers import Clicker
 
 pr.init_window(800,450,"idle game")
 pr.set_target_fps(General_Data.FRAMES_PER_SECOND)
-
+General_Data.read()
 Clicker.init()
 
 while not pr.window_should_close():
@@ -33,3 +33,5 @@ while not pr.window_should_close():
     pr.end_drawing()
 
 pr.close_window()
+
+General_Data.write()
