@@ -1,8 +1,8 @@
-# idle_python v0.3.1
+# idle_python v0.4
 
 constantly in-progress idle game using pyray (raylib bindings for python) for Python practice
 
-### directions
+## directions
 - install python
 - install pyray
     - probably: `pip install python`
@@ -14,12 +14,17 @@ constantly in-progress idle game using pyray (raylib bindings for python) for Py
 - run: `idle_python.py`
 - or `python idle_python.py`
 
-### features
+## features
 - v0.1: click box -> increment money!
 - v0.2: upgrade clicks
-- v0.3: (new!) buy clickers
+- v0.3: buy clickers
+- v0.4: (new!) upgrade clicker speed
 
-### file structure
+## changes
+- added click speed upgrade, refactored clicks.py into clickers.py 
+- Clicker class now has subclasses controlling each different upgrade
+
+## file structure
 - idle_python.py
 	- contains:
     		- the main script
@@ -28,7 +33,6 @@ constantly in-progress idle game using pyray (raylib bindings for python) for Py
         	- General_Data
         	- Button
         	- Clicker
-        	- Click
 - clickers.py
 	- contains:
 		- Clicker class definition
@@ -37,13 +41,6 @@ constantly in-progress idle game using pyray (raylib bindings for python) for Py
        		- pyray
            	- Button
        		- General_Data
-- clicks.py
-  	- contains:
-  		- Click class definition
-	- imports:
-		- pyray
-    		- General_Data
-    		- Button
 - buttons.py
 	- contains:
     	- Button (class definition)
