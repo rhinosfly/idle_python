@@ -1,119 +1,146 @@
 import pyray as pr
 from general_datas import General_Data
 from buttons import Button
-from clicks import Click
 
 class Clicker:
 
+    def init():
+        Clicker.Clickers.init()
+        Clicker.Damage.init()
+        Clicker.Speed.init()
+        Clicker.Visuals.init()
+        Clicker.updateClass()
+        
+    def updateClass():
+        Clicker.Clickers.updateClass()
+        Clicker.Damage.updateClass()
+        Clicker.Speed.updateClass()
+        Clicker.Visuals.updateClass()
+        
+    def __init__(self, x, y):
+        self.position = pr.Vector2(x,y)
+        self.homePosition = pr.Vector2(x,y)
+        self.triangle = Clicker.Visuals.setTriangle(self.position)
+        self.frame_count = 0 
+    
+    def updateSelf(self):
+        self.position.y -= Clicker.Visuals.padding/Clicker.Speed.frames_per_click
+        self.frame_count += 1
+        if self.frame_count >= Clicker.Speed.frames_per_click:
+            Clicker.click()
+            self.frame_count = 0
+            self.position.y = self.homePosition.y
+        self.triangle = Clicker.Visuals.setTriangle(self.position)
+
+    def click():
+        General_Data.money += Clicker.Damage.value
+
+    def draw(self):
+        pr.draw_triangle(self.triangle[0], self.triangle[1], self.triangle[2], Clicker.Visuals.color)
+
+            
+            
     class Clickers:
-        cost = 100
         List = []
+        cost = 100
         listLength = 0
 
+        def init():
+            Button.Dict["Clicker.Clickers.buy"] = Button(20,190,50,20,pr.BLUE, "", Clicker.Clickers.buy)
+            
+        def updateClass():
+            Clicker.Clickers.listLength = len(Clicker.Clickers.List)
+            Button.Dict["Clicker.Clickers.buy"].name = f"{Clicker.Clickers.cost}: clickers +1"
+
+
         def buy():
-            if General_Data.money >= Clicker.cost:
-                General_Data.money -= Clicker.cost
-                Clicker.add()
-                Clicker.cost *= 2
-                Button.Dict["BuyClicker"].name = f"{Clicker.cost}: clickers +1"
+            if General_Data.money >= Clicker.Clickers.cost:
+                General_Data.money -= Clicker.Clickers.cost
+                Clicker.Clickers.cost *= 2
+                Clicker.Clickers.add()
+
 
         def add():
-            position = Clicker.getNextPosition()
-            Clicker.List.append(Clicker(position.x, position.y))
-            Clicker.updateClass()
+            position = Clicker.Clickers.getNextPosition()
+            Clicker.Clickers.List.append(Clicker(position.x, position.y))
+            Clicker.Clickers.updateClass()
 
         def getNextPosition():
-            width = Clicker.dimentions.x + Clicker.padding 
-            height = Clicker.dimentions.y + Clicker.padding 
-            rect = Button.Dict["clickMe"].rectangle
+            width = Clicker.Visuals.dimentions.x + Clicker.Visuals.padding 
+            height = Clicker.Visuals.dimentions.y + Clicker.Visuals.padding 
+            rect = Button.Dict["Clicker.click"].rectangle
             bottomLeft = pr.Vector2(rect.x, rect.y + rect.height)
-            rowLength = int((rect.width + Clicker.padding) / width)
-            position = pr.Vector2((bottomLeft.x + Clicker.dimentions.x/2) + (width * (Clicker.listLength % rowLength)), 
-                                (bottomLeft.y + Clicker.padding) + (height * int(Clicker.listLength / rowLength)))
+            rowLength = int((rect.width + Clicker.Visuals.padding) / width)
+            position = pr.Vector2((bottomLeft.x + Clicker.Visuals.dimentions.x/2) + (width * (Clicker.Clickers.listLength % rowLength)), 
+                                (bottomLeft.y + Clicker.Visuals.padding) + (height * int(Clicker.Clickers.listLength / rowLength)))
             return position
 
+        
     class Damage:
         level = 1
         value = None
         cost  = None
 
         def init():
-            Click.update()
-            Button.Dict["clickMe"] = Button(550,100,150,150,pr.RED,"click me", Click.click)
-            Button.Dict["upgradeClick"] = Button(20,150,50,20,pr.BLUE, "20: click damage +1", Click.upgrade)
+            Button.Dict["Clicker.click"] = Button(550,100,150,150,pr.RED,"click me", Clicker.click)
+            Button.Dict["Clicker.Damage.buy"] = Button(20,150,50,20,pr.BLUE, "", Clicker.Damage.buy)
 
-        def update():
-            Click.value = Click.level
-            Click.cost = 10 * (2 ** Click.level)
+        def updateClass():
+            Clicker.Damage.value = Clicker.Damage.level
+            Clicker.Damage.cost = 10 * (2 ** Clicker.Damage.level)
+            Button.Dict["Clicker.Damage.buy"].name = str(Clicker.Damage.cost) + ": click damage +1"
 
-        def click():
-            General_Data.money += Click.value
+        def buy():
+            if General_Data.money >= Clicker.Damage.cost:
+                General_Data.money -= Clicker.Damage.cost
+                Clicker.Damage.upgrade()
+                
             
         def upgrade():
-            if General_Data.money >= Click.cost:
-                General_Data.money -= Click.cost
-                Click.level += 1
-                Click.update()
-                Button.Dict["upgradeClick"].name = str(Click.cost) + ": click damage +1"
+                Clicker.Damage.level += 1
+                Clicker.Damage.updateClass()
 
+                
     class Speed:
         level = 0
-        upgradeCost = 1000
+        cost = 1000
         clicks_per_second = 1
         frames_per_click = None
 
-        def buyUpgradeSpeed():
-            if General_Data.money >= Clicker.upgradeCost:
-                General_Data.money -= Clicker.upgradeCost
-                Clicker.upgradeCost *= 2
-                Clicker.upgradeSpeed()
-                Button.Dict["UpgradeClickerSpeed"].name = f"{Clicker.upgradeCost}: cps +1" 
+        def init():
+            Button.Dict["Clicker.Speed.buy"] = Button(20,230,50,20,pr.BLUE, "", Clicker.Speed.buy)
 
-        def upgradeSpeed():
-            Clicker.level += 1
-            Clicker.updateClass()
+        def updateClass():
+            Clicker.Speed.clicks_per_second = (Clicker.Speed.level + 1)
+            Clicker.Speed.frames_per_click = General_Data.FRAMES_PER_SECOND / Clicker.Speed.clicks_per_second
+            Button.Dict["Clicker.Speed.buy"].name = f"{Clicker.Speed.cost}: cps +1" 
 
+        def buy():
+            if General_Data.money >= Clicker.Speed.cost:
+                General_Data.money -= Clicker.Speed.cost
+                Clicker.Speed.cost *= 2
+                Clicker.Speed.upgrade()
+
+        def upgrade():
+            Clicker.Speed.level += 1
+            Clicker.Speed.updateClass()
+
+            
     class Visuals:
         color = pr.WHITE
         dimentions = pr.Vector2(14,21)
         padding = 5
 
-        def draw(self):
-            pr.draw_triangle(self.triangle[0], self.triangle[1], self.triangle[2], Clicker.color)
+        def init():
+            pass
+        def updateClass():
+            pass
 
         def setTriangle(position):
             triangle = [pr.Vector2(position.x, position.y), 
-                        pr.Vector2(position.x-Clicker.dimentions.x/2, position.y+Clicker.dimentions.y), 
-                        pr.Vector2(position.x+Clicker.dimentions.x/2, position.y+Clicker.dimentions.y)]
+                        pr.Vector2(position.x-Clicker.Visuals.dimentions.x/2, position.y+Clicker.Visuals.dimentions.y), 
+                        pr.Vector2(position.x+Clicker.Visuals.dimentions.x/2, position.y+Clicker.Visuals.dimentions.y)]
             return triangle
 
 
-
-    def init():
-        Clicker.updateClass()
-        Button.Dict["BuyClicker"] = Button(20,190,50,20,pr.BLUE, "100: clickers +1", Clicker.buy)
-        Button.Dict["UpgradeClickerSpeed"] = Button(20,230,50,20,pr.BLUE, "1000: cps +1", Clicker.buyUpgradeSpeed)
-
-    def updateClass():
-        Clicker.clicks_per_second = (Clicker.level + 1)
-        Clicker.frames_per_click = General_Data.FRAMES_PER_SECOND / Clicker.clicks_per_second
-        Clicker.listLength = len(Clicker.List)
-
-    def __init__(self, x, y):
-        self.position = pr.Vector2(x,y)
-        self.homePosition = pr.Vector2(x,y)
-        self.triangle = Clicker.setTriangle(self.position)
-        self.frame_count = 0 
-
-    
-    def updateSelf(self):
-        self.position.y -= Clicker.padding/Clicker.frames_per_click
-        self.frame_count += 1
-        if self.frame_count >= Clicker.frames_per_click:
-            Click.click()
-            self.frame_count = 0
-            self.position.y = self.homePosition.y
-        self.triangle = Clicker.setTriangle(self.position)
-
-    
 
