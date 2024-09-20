@@ -6,7 +6,7 @@ from clicks import Click
 class Clicker:
     color = pr.WHITE
     level = 0
-    clicks_per_minute = 60
+    clicks_per_second = 1
     frames_per_click = None
     dimentions = pr.Vector2(14,21)
     padding = 5
@@ -21,8 +21,8 @@ class Clicker:
         Button.Dict["UpgradeClickerSpeed"] = Button(20,230,50,20,pr.BLUE, "1000: cps +1", Clicker.buyUpgradeSpeed)
 
     def updateClass():
-        Clicker.clicks_per_minute = 60*(Clicker.level + 1)
-        Clicker.frames_per_click = 60.0 * General_Data.FRAMES_PER_SECOND / Clicker.clicks_per_minute
+        Clicker.clicks_per_second = (Clicker.level + 1)
+        Clicker.frames_per_click = General_Data.FRAMES_PER_SECOND / Clicker.clicks_per_second
         Clicker.listLength = len(Clicker.List)
 
     def buy():
