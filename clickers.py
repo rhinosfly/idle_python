@@ -8,7 +8,6 @@ class Clicker:
         Clicker.Clickers.init()
         Clicker.Damage.init()
         Clicker.Speed.init()
-        Clicker.Visuals.init()
         #update
         Clicker.updateClass()
         #phase2
@@ -19,7 +18,6 @@ class Clicker:
         Clicker.Clickers.updateClass()
         Clicker.Damage.updateClass()
         Clicker.Speed.updateClass()
-        Clicker.Visuals.updateClass()
         
     def __init__(self, x, y):
         self.position = pr.Vector2(x,y)
@@ -28,7 +26,7 @@ class Clicker:
         self.frame_count = 0 
     
     def updateSelf(self):
-        self.position.y -= Clicker.Visuals.padding/Clicker.Speed.frames_per_click
+        self.position.y -= Clicker.Visuals.padding / Clicker.Speed.frames_per_click #increment position by distance/timeperframe
         self.frame_count += 1
         if self.frame_count >= Clicker.Speed.frames_per_click:
             Clicker.click()
@@ -63,12 +61,13 @@ class Clicker:
         file.write(f"\t\"Speed\":{Clicker.Speed.level}\n")
         #closer
         file.write("\t}\n")
-            
+           
+
     class Clickers:
         List = []
         cost = None
         listLength = 0
-        targetLength = 0
+        targetLength = 0 #read from save file; does nothing afterward
 
         def init():
             Button.Dict["Clicker.Clickers.buy"] = Button(20,190,50,20,pr.BLUE, "", Clicker.Clickers.buy)
@@ -161,11 +160,6 @@ class Clicker:
         color = pr.WHITE
         dimentions = pr.Vector2(14,21)
         padding = 5
-
-        def init():
-            pass
-        def updateClass():
-            pass
 
         def setTriangle(position):
             triangle = [pr.Vector2(position.x, position.y), 
