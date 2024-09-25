@@ -20,25 +20,23 @@ class Clicker:
         Clicker.Speed.updateClass()
         
     def __init__(self, x, y):
-        self.position = pr.Vector2(x,y)
-        self.homePosition = pr.Vector2(x,y)
-        self.triangle = Clicker.Visuals.setTriangle(self.position)
+        self.Visuals = Clicker.Visuals(x,y)
         self.frame_count = 0 
     
     def updateSelf(self):
-        self.position.y -= Clicker.Visuals.padding / Clicker.Speed.frames_per_click #increment position by distance/timeperframe
+        self.Visuals.position.y -= Clicker.Visuals.padding / Clicker.Speed.frames_per_click #increment position by distance/timeperframe
         self.frame_count += 1
         if self.frame_count >= Clicker.Speed.frames_per_click:
             Clicker.click()
             self.frame_count = 0
-            self.position.y = self.homePosition.y
-        self.triangle = Clicker.Visuals.setTriangle(self.position)
+            self.Visuals.position.y = self.Visuals.homePosition.y
+        self.Visuals.triangle = Clicker.Visuals.setTriangle(self.Visuals.position)
 
     def click():
         General_Data.money += Clicker.Damage.value
 
     def draw(self):
-        pr.draw_triangle(self.triangle[0], self.triangle[1], self.triangle[2], Clicker.Visuals.color)
+        pr.draw_triangle(self.Visuals.triangle[0], self.Visuals.triangle[1], self.Visuals.triangle[2], Clicker.Visuals.color)
 
     def read(Dict):
         if "Clicker" in Dict:
@@ -161,6 +159,11 @@ class Clicker:
         dimentions = pr.Vector2(14,21)
         padding = 5
 
+        def __init__(self, x, y):
+            self.position = pr.Vector2(x,y)
+            self.homePosition = pr.Vector2(x,y)
+            self.triangle = Clicker.Visuals.setTriangle(self.position)
+ 
         def setTriangle(position):
             triangle = [pr.Vector2(position.x, position.y), 
                         pr.Vector2(position.x-Clicker.Visuals.dimentions.x/2, position.y+Clicker.Visuals.dimentions.y), 
