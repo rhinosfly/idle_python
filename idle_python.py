@@ -2,14 +2,12 @@
 #working progress idle game in pyray
 
 import pyray as pr
+import start_finish
 from general_datas import General_Data
 from buttons import Button 
 from clickers import Clicker
 
-pr.init_window(800,450,"idle game")
-pr.set_target_fps(General_Data.FRAMES_PER_SECOND)
-General_Data.read()
-Clicker.init()
+start_finish.start()
 
 while not pr.window_should_close():
 
@@ -32,6 +30,4 @@ while not pr.window_should_close():
 
     pr.end_drawing()
 
-pr.close_window()
-
-General_Data.write()
+start_finish.finish()

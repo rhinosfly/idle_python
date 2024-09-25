@@ -9,7 +9,11 @@ class Clicker:
         Clicker.Damage.init()
         Clicker.Speed.init()
         Clicker.Visuals.init()
+        #update
         Clicker.updateClass()
+        #phase2
+        Clicker.Clickers.init_phase2()
+
         
     def updateClass():
         Clicker.Clickers.updateClass()
@@ -38,27 +42,54 @@ class Clicker:
     def draw(self):
         pr.draw_triangle(self.triangle[0], self.triangle[1], self.triangle[2], Clicker.Visuals.color)
 
-            
+    def read(Dict):
+        if "Clicker" in Dict:
+            Dict = Dict["Clicker"]
+        else:
+            return
+        if "Clickers" in Dict:
+            Clicker.Clickers.targetLength = Dict["Clickers"]
+        if "Damage" in Dict:
+            Clicker.Damage.level = Dict["Damage"]
+        if "Speed" in Dict:
+            Clicker.Speed.level = Dict["Speed"]
+
+    def write(file):
+        #opener
+        file.write("\"Clicker\" : \n\t{\n")
+        #body
+        file.write(f"\t\"Clickers\":{Clicker.Clickers.listLength},\n")
+        file.write(f"\t\"Damage\":{Clicker.Damage.level},\n")
+        file.write(f"\t\"Speed\":{Clicker.Speed.level}\n")
+        #closer
+        file.write("\t}\n")
             
     class Clickers:
         List = []
-        cost = 100
+        cost = None
         listLength = 0
+        targetLength = 0
 
         def init():
             Button.Dict["Clicker.Clickers.buy"] = Button(20,190,50,20,pr.BLUE, "", Clicker.Clickers.buy)
-            
+        
+        def init_phase2():
+            Clicker.Clickers.correctLength()
+
         def updateClass():
             Clicker.Clickers.listLength = len(Clicker.Clickers.List)
+            Clicker.Clickers.cost = 100 * 2**Clicker.Clickers.listLength
             Button.Dict["Clicker.Clickers.buy"].name = f"{Clicker.Clickers.cost}: clickers +1"
-
+            
+        def correctLength():
+            diff = Clicker.Clickers.targetLength - Clicker.Clickers.listLength
+            for i in range(diff):
+                Clicker.Clickers.add()
 
         def buy():
             if General_Data.money >= Clicker.Clickers.cost:
                 General_Data.money -= Clicker.Clickers.cost
-                Clicker.Clickers.cost *= 2
                 Clicker.Clickers.add()
-
 
         def add():
             position = Clicker.Clickers.getNextPosition()
@@ -77,7 +108,7 @@ class Clicker:
 
         
     class Damage:
-        level = 1
+        level = 0
         value = None
         cost  = None
 
@@ -86,7 +117,7 @@ class Clicker:
             Button.Dict["Clicker.Damage.buy"] = Button(20,150,50,20,pr.BLUE, "", Clicker.Damage.buy)
 
         def updateClass():
-            Clicker.Damage.value = Clicker.Damage.level
+            Clicker.Damage.value = Clicker.Damage.level + 1
             Clicker.Damage.cost = 10 * (2 ** Clicker.Damage.level)
             Button.Dict["Clicker.Damage.buy"].name = str(Clicker.Damage.cost) + ": click damage +1"
 
@@ -103,8 +134,8 @@ class Clicker:
                 
     class Speed:
         level = 0
-        cost = 1000
-        clicks_per_second = 1
+        cost = None
+        clicks_per_second = None
         frames_per_click = None
 
         def init():
@@ -112,13 +143,13 @@ class Clicker:
 
         def updateClass():
             Clicker.Speed.clicks_per_second = (Clicker.Speed.level + 1)
+            Clicker.Speed.cost = 1000 * 2**Clicker.Speed.level
             Clicker.Speed.frames_per_click = General_Data.FRAMES_PER_SECOND / Clicker.Speed.clicks_per_second
             Button.Dict["Clicker.Speed.buy"].name = f"{Clicker.Speed.cost}: cps +1" 
 
         def buy():
             if General_Data.money >= Clicker.Speed.cost:
                 General_Data.money -= Clicker.Speed.cost
-                Clicker.Speed.cost *= 2
                 Clicker.Speed.upgrade()
 
         def upgrade():
@@ -141,6 +172,3 @@ class Clicker:
                         pr.Vector2(position.x-Clicker.Visuals.dimentions.x/2, position.y+Clicker.Visuals.dimentions.y), 
                         pr.Vector2(position.x+Clicker.Visuals.dimentions.x/2, position.y+Clicker.Visuals.dimentions.y)]
             return triangle
-
-
-
