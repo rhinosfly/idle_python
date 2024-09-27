@@ -76,7 +76,7 @@ class Clicker:
         def updateClass():
             Clicker.Clickers.listLength = len(Clicker.Clickers.List)
             Clicker.Clickers.cost = 100 * 2**Clicker.Clickers.listLength
-            Button.Dict["Clicker.Clickers.buy"].name = f"{Clicker.Clickers.cost}: clickers +1"
+            Button.Dict["Clicker.Clickers.buy"].name = f"{Clicker.Clickers.cost:,}: clickers +1"
             
         def correctLength():
             diff = Clicker.Clickers.targetLength - Clicker.Clickers.listLength
@@ -116,7 +116,7 @@ class Clicker:
         def updateClass():
             Clicker.Damage.value = Clicker.Damage.level + 1
             Clicker.Damage.cost = 10 * (2 ** Clicker.Damage.level)
-            Button.Dict["Clicker.Damage.buy"].name = str(Clicker.Damage.cost) + ": click damage +1"
+            Button.Dict["Clicker.Damage.buy"].name = f"{Clicker.Damage.cost:,}" + ": click damage +1"
 
         def buy():
             if General_Data.money >= Clicker.Damage.cost:
@@ -142,7 +142,7 @@ class Clicker:
             Clicker.Speed.clicks_per_second = (Clicker.Speed.level + 1)
             Clicker.Speed.cost = 1000 * 2**Clicker.Speed.level
             Clicker.Speed.frames_per_click = General_Data.FRAMES_PER_SECOND / Clicker.Speed.clicks_per_second
-            Button.Dict["Clicker.Speed.buy"].name = f"{Clicker.Speed.cost}: cps +1" 
+            Button.Dict["Clicker.Speed.buy"].name = f"{Clicker.Speed.cost:,}: cps +1" 
 
         def buy():
             if General_Data.money >= Clicker.Speed.cost:
