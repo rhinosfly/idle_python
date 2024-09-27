@@ -1,9 +1,13 @@
 # class General_Data contains "things" (currently just data) relevant to the whole program. 
+import os
 
 class General_Data:
     money = 0
     FRAMES_PER_SECOND = 60
     SAVE_FILE = "saveState.json"
+    
+    def init():
+        General_Data.SAVE_FILE = os.getcwd() + "/" + General_Data.SAVE_FILE
 
     def read(Dict):
         if "General_Data" in Dict:
