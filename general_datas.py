@@ -1,5 +1,4 @@
 # class General_Data contains "things" (currently just data) relevant to the whole program. 
-import os
 
 class General_Data:
     money = 0
@@ -7,7 +6,7 @@ class General_Data:
     SAVE_FILE = "saveState.json"
     
     def init():
-        General_Data.SAVE_FILE = getPath() + General_Data.SAVE_FILE
+        General_Data.SAVE_FILE = getPath() + General_Data.SAVE_FILE     #prefix full path to filename, required to run from windows file exporer
 
     def read(Dict):
         if "General_Data" in Dict:
@@ -32,6 +31,9 @@ class General_Data:
         file.write("\t}\n")
 
 
+
+
+#windows requires full path to run from file explorer :(
 def getPath():
     path = __file__
     slashIndex = 0
@@ -44,7 +46,7 @@ def getPath():
     path = path[:slashIndex+1]
     return doubleBackslashes(path)
 
-
+#used to account for escape characters for python strings and json strings when running on windows :(
 def doubleBackslashes(string):
     newString = ""
 

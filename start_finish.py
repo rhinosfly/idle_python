@@ -17,7 +17,10 @@ def start():
 def finish():
     pr.close_window()
     write()
-    print(open(General_Data.SAVE_FILE, 'r').read(), end='')
+    file = open(General_Data.SAVE_FILE, 'r')
+    print(file.read(), end='')
+    file.close()
+
 
 
 def read():
@@ -57,7 +60,9 @@ def getSaveState():
                 Dict = json.loads(file.read())
             except:
                 print("warning: getSaveState: could not load json save file")
+                file.close()
                 return {}
             else:
+                file.close()
                 return Dict
 
