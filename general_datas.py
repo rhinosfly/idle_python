@@ -7,7 +7,7 @@ class General_Data:
     SAVE_FILE = "saveState.json"
     
     def init():
-        General_Data.SAVE_FILE = os.getcwd() + "/" + General_Data.SAVE_FILE
+        General_Data.SAVE_FILE = getPath() + General_Data.SAVE_FILE
 
     def read(Dict):
         if "General_Data" in Dict:
@@ -32,5 +32,14 @@ class General_Data:
         file.write("\t}\n")
 
 
+def getPath():
+    path = __file__
+    slashIndex = 0
 
+    for i in range(len(path)-1, -1, -1):
+        if path[i] == '/' or path[i] == '\\':
+            slashIndex = i
+            break
+
+    return path[:slashIndex+1]
 
