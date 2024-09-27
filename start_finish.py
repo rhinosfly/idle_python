@@ -38,6 +38,7 @@ def write():
     file = open(General_Data.SAVE_FILE, 'a')
     #opener
     file.write("{\n")
+    file.write("\"COMMENT\" : \"This is all of the data that persists between saves. You can edit this file, but I recommend making a backup because if idle_python can't parse your json file, your progress won't load and the whole file will be overwritten on the next save. Also, I'm to lazy to write type checks, so make sure you don't mess up any datatypes or else the program will not run!\",\n\n")
     #body
     General_Data.write(file)
     file.write(",\n")
