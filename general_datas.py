@@ -27,7 +27,7 @@ class General_Data:
         #body
         file.write(f"\t\"money\":{General_Data.money},\n")
         file.write(f"\t\"FRAMES_PER_SECOND\":{General_Data.FRAMES_PER_SECOND},\n")
-        file.write(f"\t\"SAVE_FILE\":\"{General_Data.SAVE_FILE}\"\n")
+        file.write(f"\t\"SAVE_FILE\":\"{doubleBackslashes(General_Data.SAVE_FILE)}\"\n")
         #closer
         file.write("\t}\n")
 
@@ -41,5 +41,17 @@ def getPath():
             slashIndex = i
             break
 
-    return path[:slashIndex+1]
+    path = path[:slashIndex+1]
+    return doubleBackslashes(path)
+
+
+def doubleBackslashes(string):
+    newString = ""
+
+    for x in string:
+        if x == '\\':
+            newString += x
+        newString += x
+
+    return newString
 
