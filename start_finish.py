@@ -54,16 +54,18 @@ def getSaveState():
         try:
             file = open(General_Data.SAVE_FILE, 'r')
         except:
-            print("warning: getSaveState: could not open save file")
+            print("Warning: getSaveState: could not open file " + General_Data.SAVE_FILE)
             return {}
         else:
+            print("Note: getSaveState: opening " + General_Data.SAVE_FILE)
             try :
                 Dict = json.loads(file.read())
             except:
-                print("warning: getSaveState: could not load json save file")
+                print("Warning: getSaveState: could not load json save file")
                 file.close()
                 return {}
             else:
+                print("Note: getSaveState: loaded json save file")
                 file.close()
                 return Dict
 
