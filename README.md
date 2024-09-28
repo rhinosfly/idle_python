@@ -1,4 +1,4 @@
-# idle_python v0.4
+# idle_python v0.5
 
 constantly in-progress idle game using pyray (raylib bindings for python) for Python practice
 
@@ -9,20 +9,19 @@ constantly in-progress idle game using pyray (raylib bindings for python) for Py
     - or: pip3 install python
 - clone repository, or download files
 - change to new directory
-    - probably: `idle_python-main` if downloaded
-    - `idle_python` if cloned
 - run: `idle_python.py`
-- or `python idle_python.py`
+- or:  `python idle_python.py`
 
 ## features
 - v0.1: click box -> increment money!
 - v0.2: upgrade clicks
 - v0.3: buy clickers
-- v0.4: (new!) upgrade clicker speed
+- v0.4: upgrade clicker speed
+- v0.5: (new!) save your progress
 
 ## changes
-- added click speed upgrade, refactored clicks.py into clickers.py 
-- Clicker class now has subclasses controlling each different upgrade
+- added start_finish.py
+- controls all init and closing, including read and write functions to "saveState.json. Calls each class' respective read and write functions.
 
 ## file structure
 - idle_python.py
@@ -30,9 +29,15 @@ constantly in-progress idle game using pyray (raylib bindings for python) for Py
     		- the main script
     	- imports:
         	- pyray
+        	- start_finish
         	- General_Data
         	- Button
-        	- Clicker
+        	- Clicker   	
+- buttons.py
+	- contains:
+    	- Button (class definition) - including dictionary of buttons
+    - imports:
+        - pyray
 - clickers.py
 	- contains:
 		- Clicker class definition
@@ -41,15 +46,12 @@ constantly in-progress idle game using pyray (raylib bindings for python) for Py
        		- pyray
            	- Button
        		- General_Data
-- buttons.py
-	- contains:
-    	- Button (class definition)
-    		- including dictionary of buttons
-    - imports:
-        - pyray
-        - General_Data
 - general_datas.py
 	- contains
 		- all globally shared data
 	- imports
 		- pyray
+- start_finish.py
+	- contains:
+		- initialize and uninitialize functions
+		- read and write functions, calling each respective class's read and write methods
