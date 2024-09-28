@@ -1,4 +1,4 @@
-# idle_python v0.5
+# idle_python v0.5.1
 
 constantly in-progress idle game using pyray (raylib bindings for python) for Python practice
 
@@ -22,36 +22,6 @@ constantly in-progress idle game using pyray (raylib bindings for python) for Py
 ## changes
 - added start_finish.py
 - controls all init and closing, including read and write functions to "saveState.json. Calls each class' respective read and write functions.
-
-## file structure
-- idle_python.py
-	- contains:
-    		- the main script
-    	- imports:
-        	- pyray
-        	- start_finish
-        	- General_Data
-        	- Button
-        	- Clicker   	
-- buttons.py
-	- contains:
-    	- Button (class definition) - including dictionary of buttons
-    - imports:
-        - pyray
-- clickers.py
-	- contains:
-		- Clicker class definition
-    			- including list of clickers
-    	- imports:
-       		- pyray
-           	- Button
-       		- General_Data
-- general_datas.py
-	- contains
-		- all globally shared data
-	- imports
-		- pyray
-- start_finish.py
-	- contains:
-		- initialize and uninitialize functions
-		- read and write functions, calling each respective class's read and write methods
+- moved submodules to submodules/
+- added submodules/__init__.py
+- removed file structure from README.md
