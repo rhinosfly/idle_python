@@ -1,5 +1,4 @@
 import pyray as pr
-from general_datas import General_Data
 
 class Button:
     Dict = {}
