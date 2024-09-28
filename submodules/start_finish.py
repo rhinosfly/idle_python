@@ -2,8 +2,8 @@
 
 import pyray as pr
 import json
-from general_datas import General_Data
-from clickers import Clicker
+from submodules.general_datas import General_Data
+from submodules.clickers import Clicker
 
 def start():
     General_Data.init()  #must be run before read

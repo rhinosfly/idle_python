@@ -1,6 +1,6 @@
 import pyray as pr
-from general_datas import General_Data
-from buttons import Button
+from submodules.general_datas import General_Data
+from submodules.buttons import Button
 
 class Clicker:
 

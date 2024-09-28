@@ -2,10 +2,10 @@
 #working progress idle game in pyray
 
 import pyray as pr
-import start_finish
-from general_datas import General_Data
-from buttons import Button 
-from clickers import Clicker
+from submodules import start_finish
+from submodules.general_datas import General_Data
+from submodules.buttons import Button 
+from submodules.clickers import Clicker
 
 start_finish.start()
 
